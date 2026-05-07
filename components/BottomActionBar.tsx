@@ -4,6 +4,7 @@ import Script from "next/script";
 import { useState } from "react";
 import type { Invitation } from "@/lib/invitations";
 import { houseLocation } from "@/lib/location";
+import { shareMetadata } from "@/lib/share";
 import styles from "./BottomActionBar.module.css";
 
 declare global {
@@ -109,16 +110,16 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
 
     try {
       if (isPublicWebUrl(shareUrl) && (await initializeKakao()) && window.Kakao?.Share) {
-        const imageUrl = new URL("/picture4.jpg", shareUrl).toString();
+        const imageUrl = new URL(shareMetadata.image.path, shareUrl).toString();
 
         window.Kakao.Share.sendDefault({
           objectType: "feed",
           content: {
-            title: "미림 규웅 집들이",
-            description: "이름을 입력하면 초대장이 열려요.",
+            title: shareMetadata.title,
+            description: shareMetadata.description,
             imageUrl,
-            imageWidth: 480,
-            imageHeight: 480,
+            imageWidth: shareMetadata.image.width,
+            imageHeight: shareMetadata.image.height,
             link: {
               mobileWebUrl: shareUrl,
               webUrl: shareUrl,
@@ -134,7 +135,8 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "집들이 초대장",
+          title: shareMetadata.title,
+          text: shareMetadata.description,
           url: shareUrl,
         });
         return;
