@@ -14,7 +14,6 @@ declare global {
       init: (key: string) => void;
       Share?: {
         sendDefault: (template: Record<string, unknown>) => void;
-        sendScrap: (template: Record<string, unknown>) => void;
       };
       Navi?: {
         start: (params: Record<string, unknown>) => void;
@@ -109,53 +108,45 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
     const shareUrl = getEntryUrl();
 
     try {
-      if (isPublicWebUrl(shareUrl) && (await initializeKakao()) && window.Kakao?.Share) {
-        const imageUrl = new URL(shareMetadata.image.path, shareUrl).toString();
+      if (!isPublicWebUrl(shareUrl)) {
+        await copyLink(shareUrl);
+        return;
+      }
 
-        window.Kakao.Share.sendDefault({
-          objectType: "feed",
-          content: {
-            title: shareMetadata.title,
-            description: shareMetadata.description,
-            imageUrl,
-            imageWidth: shareMetadata.image.width,
-            imageHeight: shareMetadata.image.height,
+      if (!(await initializeKakao()) || !window.Kakao?.Share) {
+        await copyLink(shareUrl);
+        return;
+      }
+
+      const imageUrl = new URL(shareMetadata.image.path, shareUrl).toString();
+
+      window.Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: shareMetadata.title,
+          description: shareMetadata.description,
+          imageUrl,
+          imageWidth: shareMetadata.image.width,
+          imageHeight: shareMetadata.image.height,
+          link: {
+            mobileWebUrl: shareUrl,
+            webUrl: shareUrl,
+          },
+        },
+        buttons: [
+          {
+            title: "초대장 보기",
             link: {
               mobileWebUrl: shareUrl,
               webUrl: shareUrl,
             },
           },
-          buttonTitle: "초대장 보기",
-          buttons: [
-            {
-              title: "초대장 보기",
-              link: {
-                mobileWebUrl: shareUrl,
-                webUrl: shareUrl,
-              },
-            },
-          ],
-        });
-        return;
-      }
+        ],
+      });
     } catch (error) {
       console.error("Kakao share failed", error);
+      await copyLink(shareUrl);
     }
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: shareMetadata.title,
-          text: shareMetadata.description,
-          url: shareUrl,
-        });
-        return;
-      } catch (error) {
-        console.error("Native share failed", error);
-      }
-    }
-
-    await copyLink(shareUrl);
   };
 
   return (
