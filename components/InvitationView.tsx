@@ -50,10 +50,10 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
         <figure>
           <Image
             className={styles.galleryPhoto}
-            src="/dog.jpg"
+            src="/handback_dog.jpg"
             alt="달롱이를 보러 오는 초대 사진"
-            width={994}
-            height={1372}
+            width={350}
+            height={500}
             sizes="(max-width: 460px) calc(100vw - 56px), 404px"
           />
         </figure>
