@@ -2,15 +2,16 @@
   width: min(100%, 460px);
   min-height: 100vh;
   margin: 0 auto;
+  padding-bottom: 78px;
   background: var(--card);
   box-shadow: 0 0 48px rgba(48, 42, 37, 0.1);
 }
 
 .cover {
-  min-height: 100svh;
+  min-height: calc(100svh - 78px);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  padding: 58px 28px 44px;
+  padding: 52px 28px 28px;
   background:
     linear-gradient(180deg, rgba(255, 253, 248, 0.92), rgba(255, 253, 248, 0.98)),
     radial-gradient(circle at 50% 0%, rgba(158, 107, 97, 0.15), transparent 38%);
@@ -23,15 +24,15 @@
 
 .smallTitle {
   color: var(--rose);
-  font-size: 0.68rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
 }
 
 .cover h1 {
   margin: 18px 0 0;
-  font-size: clamp(2.6rem, 13vw, 4rem);
+  font-size: clamp(2.6rem, 13vw, 2rem);
   font-weight: 500;
   line-height: 1.18;
   letter-spacing: 0;
@@ -50,8 +51,8 @@
 
 .coverPhoto {
   align-self: center;
-  min-height: min(58svh, 560px);
-  margin: 36px 0 28px;
+  min-height: clamp(300px, 43svh, 430px);
+  margin: 28px 0 18px;
   border-radius: 2px;
   background-image: url("/picture.png");
   background-position: center;
@@ -61,19 +62,13 @@
 
 .coverDateBlock {
   display: grid;
-  gap: 8px;
   text-align: center;
 }
 
-.coverDateBlock span {
-  color: var(--rose);
-  font-size: 0.75rem;
-  font-weight: 900;
-}
-
 .coverDateBlock strong {
-  color: var(--soft-ink);
-  font-size: 0.92rem;
+  color: var(--rose);
+  font-size: 1.25rem;
+  font-weight: 900;
   line-height: 1.5;
 }
 
@@ -120,6 +115,56 @@
   overflow-wrap: anywhere;
 }
 
+.contactBadges {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.contactBadges a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 10px;
+  border: 1px solid rgba(158, 107, 97, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 10px 24px rgba(48, 42, 37, 0.07);
+}
+
+.contactBadges span {
+  color: var(--rose);
+  font-size: 0.96rem;
+  font-weight: 900;
+}
+
+.phoneIcon {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(158, 107, 97, 0.12);
+  color: var(--rose);
+}
+
+.phoneIcon svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.phoneIcon path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .messageSection p + p {
   margin-top: 10px;
 }
@@ -142,12 +187,11 @@
 }
 
 .photoSection figcaption {
-  margin-top: 14px;
-  color: var(--soft-ink);
-  font-size: 0.78rem;
-  font-weight: 700;
+  margin-top: 12px;
+  color: var(--rose);
+  font-size: 1.05rem;
+  font-weight: 800;
   text-align: center;
-  text-transform: uppercase;
 }
 
 .gallerySection {
@@ -155,6 +199,7 @@
 }
 
 .mapBox {
+  position: relative;
   height: 260px;
   margin-top: 28px;
   border: 1px solid var(--line);
@@ -163,57 +208,25 @@
   overflow: hidden;
 }
 
-.locationInfo {
-  display: grid;
-  margin-top: 18px;
-  border-top: 1px solid var(--line);
-  text-align: left;
-}
-
-.locationInfo div {
-  display: grid;
-  grid-template-columns: 56px minmax(0, 1fr);
-  gap: 14px;
-  padding: 15px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.locationInfo span {
-  color: var(--moss);
-  font-size: 0.86rem;
-  font-weight: 900;
-}
-
-.locationInfo strong {
-  color: var(--ink);
-  font-size: 0.95rem;
-  line-height: 1.65;
-}
-
 .mapActionGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 22px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  gap: 10px;
+  margin-top: 14px;
 }
 
 .mapActionGrid a {
-  min-height: 76px;
-  display: grid;
+  min-height: 58px;
+  display: flex;
   align-content: center;
+  align-items: center;
   justify-content: center;
-  justify-items: center;
-  gap: 7px;
-  border: 0;
-  background: transparent;
+  gap: 8px;
+  border: 1px solid rgba(158, 107, 97, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.92);
   color: var(--ink);
-  box-shadow: none;
-}
-
-.mapActionGrid a + a {
-  border-left: 1px solid var(--line);
+  box-shadow: 0 12px 26px rgba(48, 42, 37, 0.07);
 }
 
 .actionIcon {
@@ -252,6 +265,12 @@
   font-size: 0.76rem;
   font-style: normal;
   font-weight: 700;
+}
+
+@media (max-width: 360px) {
+  .contactBadges {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (min-width: 760px) {

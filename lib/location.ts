@@ -12,4 +12,3 @@ export const kakaoMapUrl = `https://map.kakao.com/link/map/${encodedPlaceName},$
 export const kakaoRouteUrl = `https://map.kakao.com/link/to/${encodedPlaceName},${houseLocation.lat},${houseLocation.lng}`;
 export const kakaoRouteMobileWebUrl = `https://m.map.kakao.com/scheme/route?ep=${houseLocation.lat},${houseLocation.lng}&by=car`;
 export const tmapRouteUrl = `tmap://route?goalname=${encodedPlaceName}&goalx=${houseLocation.lng}&goaly=${houseLocation.lat}`;
-

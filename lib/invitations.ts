@@ -54,6 +54,28 @@ export const invitations: Invitation[] = [
   },
 ];
 
+const guestInvitationSlugs = new Map<string, string>(
+  [
+    ["최성환", "2026-05-09"],
+    ["이동혁", "2026-05-09"],
+    ["고동혁", "2026-05-09"],
+    ["배유정", "2026-05-29"],
+    ["강다은", "2026-05-29"],
+    ["양정석", "2026-05-30"],
+    ["송현호", "2026-05-30"],
+    ["김영선", "2026-05-30"],
+    ["박정빈", "2026-05-30"],
+  ] as const
+);
+
+export function normalizeGuestName(name: string) {
+  return name.replace(/\s/g, "");
+}
+
+export function getInvitationSlugByGuestName(name: string) {
+  return guestInvitationSlugs.get(normalizeGuestName(name));
+}
+
 export function getInvitation(slug: string) {
   return invitations.find((invitation) => invitation.slug === slug);
 }
