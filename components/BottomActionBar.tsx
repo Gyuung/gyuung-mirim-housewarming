@@ -126,6 +126,15 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
             },
           },
           buttonTitle: "초대장 보기",
+          buttons: [
+            {
+              title: "초대장 보기",
+              link: {
+                mobileWebUrl: shareUrl,
+                webUrl: shareUrl,
+              },
+            },
+          ],
         });
         return;
       }
