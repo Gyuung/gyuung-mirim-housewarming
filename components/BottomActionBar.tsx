@@ -13,6 +13,7 @@ declare global {
       init: (key: string) => void;
       Share?: {
         sendDefault: (template: Record<string, unknown>) => void;
+        sendScrap: (template: Record<string, unknown>) => void;
       };
       Navi?: {
         start: (params: Record<string, unknown>) => void;
@@ -25,6 +26,8 @@ const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JAVASCRIPT_KEY;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 const kakaoSdkUrl = "https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js";
 const calendarTitle = "집들이 초대";
+const privateIpPattern =
+  /^(10\.|127\.|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.)/;
 
 type BottomActionBarProps = {
   invitation: Invitation;
@@ -81,6 +84,20 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
     return new URL(window.location.pathname, siteUrl).toString();
   };
 
+  const isPublicWebUrl = (url: string) => {
+    try {
+      const parsedUrl = new URL(url);
+
+      return (
+        parsedUrl.protocol === "https:" &&
+        parsedUrl.hostname !== "localhost" &&
+        !privateIpPattern.test(parsedUrl.hostname)
+      );
+    } catch {
+      return false;
+    }
+  };
+
   const copyLink = async (url = getShareUrl()) => {
     await navigator.clipboard.writeText(url);
     setCopied(true);
@@ -91,15 +108,18 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
     const shareUrl = getShareUrl();
 
     try {
-      if ((await initializeKakao()) && window.Kakao?.Share) {
-        window.Kakao.Share.sendDefault({
-          objectType: "text",
-          text: `${invitation.dateLabel} ${invitation.timeLabel} 집들이 초대장\n${houseLocation.name}`,
-          link: {
-            mobileWebUrl: shareUrl,
-            webUrl: shareUrl,
-          },
-          buttonTitle: "초대장 보기",
+      if (isPublicWebUrl(shareUrl) && (await initializeKakao()) && window.Kakao?.Share) {
+        window.Kakao.Share.sendScrap({
+          requestUrl: shareUrl,
+          buttons: [
+            {
+              title: "초대장 보기",
+              link: {
+                mobileWebUrl: shareUrl,
+                webUrl: shareUrl,
+              },
+            },
+          ],
         });
         return;
       }
