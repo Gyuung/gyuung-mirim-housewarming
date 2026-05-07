@@ -4,3 +4,7 @@ out/
 
 *.log
 .env*
+
+# Local notes and generated docs
+*.md
+docs/
