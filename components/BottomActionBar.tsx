@@ -125,6 +125,7 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
               webUrl: shareUrl,
             },
           },
+          buttonTitle: "초대장 보기",
         });
         return;
       }
