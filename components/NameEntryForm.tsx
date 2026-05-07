@@ -20,6 +20,7 @@ export default function NameEntryForm() {
     }
 
     setError("");
+    window.sessionStorage.setItem("houseparty-invitation-date", slug);
     router.push(`/${slug}`);
   };
 

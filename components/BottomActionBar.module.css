@@ -6,36 +6,80 @@
   left: 0;
   width: min(100%, 460px);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
   margin: 0 auto;
-  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--line);
-  background: rgba(255, 253, 248, 0.98);
-  box-shadow: 0 -10px 24px rgba(48, 42, 37, 0.08);
-  backdrop-filter: blur(12px);
+  padding: 0 0 env(safe-area-inset-bottom);
+  background: #666;
+  box-shadow: 0 -8px 22px rgba(0, 0, 0, 0.12);
 }
 
+.bar::before,
+.bar::after {
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.2);
+  content: "";
+  transform: translateY(-50%);
+}
+
+.bar::before {
+  left: 33.333%;
+}
+
+.bar::after {
+  left: 66.666%;
+}
+
+.bar a,
 .bar button {
   min-width: 0;
-  min-height: 46px;
+  width: 100%;
+  height: 60px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 0 10px;
-  background: #fff;
-  color: var(--ink);
+  gap: 8px;
+  border: 0;
+  border-radius: 0;
+  padding: 1px 10px 0;
+  background: transparent;
+  color: #fff;
   font: inherit;
   font-size: 0.86rem;
   font-weight: 800;
   letter-spacing: 0;
+  line-height: 1;
+  text-decoration: none;
+  appearance: none;
   cursor: pointer;
 }
 
-.bar .kakaoShare {
-  border-color: #fae100;
-  background: #fae100;
-  color: #2a2824;
+.bar a:focus-visible,
+.bar button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: -5px;
+}
+
+.bar svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bar .kakaoShare svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.bar span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }

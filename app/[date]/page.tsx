@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import InvitationGate from "@/components/InvitationGate";
 import InvitationView from "@/components/InvitationView";
 import { getInvitation, invitations } from "@/lib/invitations";
 
@@ -54,5 +55,9 @@ export default async function InvitationPage({ params }: InvitationPageProps) {
     notFound();
   }
 
-  return <InvitationView invitation={invitation} />;
+  return (
+    <InvitationGate date={date}>
+      <InvitationView invitation={invitation} />
+    </InvitationGate>
+  );
 }
