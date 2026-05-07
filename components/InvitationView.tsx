@@ -1,6 +1,7 @@
 import BackgroundMusic from "@/components/BackgroundMusic";
 import BottomActionBar from "@/components/BottomActionBar";
 import DayCountdown from "@/components/DayCountdown";
+import Guestbook from "@/components/Guestbook";
 import KakaoMap from "@/components/KakaoMap";
 import PhotoGallery from "@/components/PhotoGallery";
 import Image from "next/image";
@@ -113,6 +114,8 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
           </a>
         </div>
       </section>
+
+      <Guestbook invitationSlug={invitation.slug} />
 
       <BottomActionBar invitation={invitation} />
     </main>
