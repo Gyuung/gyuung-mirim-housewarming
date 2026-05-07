@@ -78,7 +78,6 @@
 .locationSection {
   padding: 70px 28px;
   text-align: center;
-  border-bottom: 1px solid var(--line);
 }
 
 .messageSection h2,
@@ -172,7 +171,6 @@
 
 .photoSection {
   padding: 0 28px 72px;
-  border-bottom: 1px solid var(--line);
 }
 
 .photoSection figure {
@@ -185,14 +183,6 @@
   display: block;
   border-radius: 2px;
   box-shadow: 0 16px 36px rgba(48, 42, 37, 0.13);
-}
-
-.photoSection figcaption {
-  margin-top: 12px;
-  color: var(--rose);
-  font-size: 1.05rem;
-  font-weight: 800;
-  text-align: center;
 }
 
 .gallerySection {

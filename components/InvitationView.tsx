@@ -56,7 +56,6 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
             height={1372}
             sizes="(max-width: 460px) calc(100vw - 56px), 404px"
           />
-          <figcaption>따뜻한 우리 집으로 초대합니다</figcaption>
         </figure>
       </section>
 
