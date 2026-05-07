@@ -15,13 +15,14 @@
     "react-dom": "19.0.0"
   },
   "devDependencies": {
+    "@types/inquirer": "9.0.9",
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.5",
-    "inquirer": "13.4.2",
-    "tsx": "4.21.0",
+    "inquirer": "^8.2.5",
+    "tsx": "^4.9.13",
     "typescript": "^5"
   },
   "overrides": {

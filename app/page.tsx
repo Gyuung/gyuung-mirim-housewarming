@@ -7,8 +7,13 @@ export default function Home() {
     <main className={styles.shell}>
       <section className={styles.hero}>
         <p className={styles.smallTitle}>Housewarming Invitation</p>
-        <h1>집들이 날짜 선택</h1>
-        <p>초대받은 날짜를 선택하면 해당 날짜의 모바일 초대장을 볼 수 있어요.</p>
+        <h1>
+          집들이 날짜를
+          <br />
+          골라주세요
+        </h1>
+        <p className={styles.dallongiBadge}>달롱이 (우파루파) 보러 오세요</p>
+        <p>초대받은 날짜를 선택하면 모바일 초대장이 열려요.</p>
       </section>
 
       <section className={styles.datePicker} aria-label="예정된 집들이 날짜">
