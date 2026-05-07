@@ -13,7 +13,7 @@
   padding: 56px 26px 42px;
   background:
     linear-gradient(180deg, rgba(31, 43, 34, 0.16), rgba(31, 43, 34, 0.78)),
-    url("/housewarming-hero.png");
+    url("/dallongi.jpg");
   background-position: center;
   background-size: cover;
   color: #fffaf4;
@@ -76,4 +76,3 @@
   font-style: normal;
   font-weight: 700;
 }
-
