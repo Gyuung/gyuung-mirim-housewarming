@@ -1,11 +1,26 @@
+"use client";
+
 import NameEntryForm from "@/components/NameEntryForm";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const [showBallongi, setShowBallongi] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setShowBallongi((current) => !current);
+    }, 2000);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <main className={styles.shell}>
       <section className={styles.hero}>
-        <div className={styles.heroPhoto} />
+        <div
+          className={`${styles.heroPhoto} ${showBallongi ? styles.heroPhotoAlt : ""}`}
+        />
         <div className={styles.heroContent}>
           <p className={styles.smallTitle}>Housewarming Invitation</p>
           <h1>
@@ -13,7 +28,9 @@ export default function Home() {
             <br />
             초대합니다
           </h1>
-          <p className={styles.dallongiBadge}>달롱이 (우파루파) 보러 오세요</p>
+          <p className={styles.dallongiBadge}>
+            {showBallongi ? "발롱이 (베타) 보러 오세요" : "달롱이 (우파루파) 보러 오세요"}
+          </p>
           <p>이름을 입력하면 초대장이 열려요.</p>
         </div>
       </section>

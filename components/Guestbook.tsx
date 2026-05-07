@@ -159,7 +159,9 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
 
   return (
     <section className={styles.guestbook} aria-labelledby="guestbook-title">
-      <h2 id="guestbook-title" className={styles.smallTitle}>Guestbook</h2>
+      <p id="guestbook-title" className={styles.smallTitle}>
+        Guestbook
+      </p>
       <p className={styles.description}>오신다는 마음, 짧게 남겨주세요.</p>
 
       <form className={styles.form} onSubmit={submitEntry}>
