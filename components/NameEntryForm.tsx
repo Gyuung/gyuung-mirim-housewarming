@@ -25,12 +25,12 @@ export default function NameEntryForm() {
 
   return (
     <form className={styles.joinForm} onSubmit={joinInvitation}>
-      <label htmlFor="guest-name">이름</label>
       <div className={styles.inputRow}>
         <input
           id="guest-name"
           name="guest-name"
           type="text"
+          aria-label="이름"
           autoComplete="name"
           placeholder="이름을 입력해주세요"
           value={name}
