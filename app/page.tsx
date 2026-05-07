@@ -8,6 +8,12 @@ export default function Home() {
   const [showBallongi, setShowBallongi] = useState(false);
 
   useEffect(() => {
+    const dallongi = new window.Image();
+    const ballongi = new window.Image();
+
+    dallongi.src = "/dallongi.jpg";
+    ballongi.src = "/ballongi.jpg";
+
     const timer = window.setInterval(() => {
       setShowBallongi((current) => !current);
     }, 2000);
@@ -18,9 +24,10 @@ export default function Home() {
   return (
     <main className={styles.shell}>
       <section className={styles.hero}>
-        <div
-          className={`${styles.heroPhoto} ${showBallongi ? styles.heroPhotoAlt : ""}`}
-        />
+        <div className={styles.heroPhotoStack} aria-hidden="true">
+          <div className={styles.heroPhotoBase} />
+          <div className={`${styles.heroPhotoAlt} ${showBallongi ? styles.isVisible : ""}`} />
+        </div>
         <div className={styles.heroContent}>
           <p className={styles.smallTitle}>Housewarming Invitation</p>
           <h1>
