@@ -1,0 +1,51 @@
+.gallery {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.viewer {
+  overflow: hidden;
+  border-radius: 2px;
+  background: #f2eee7;
+  box-shadow: 0 16px 36px rgba(48, 42, 37, 0.12);
+}
+
+.viewer img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.thumbnails button {
+  aspect-ratio: 1;
+  min-width: 0;
+  display: block;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.58;
+  transition: opacity 160ms ease, border-color 160ms ease;
+}
+
+.thumbnails button img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.thumbnails .activeThumbnail {
+  border-color: var(--rose);
+  opacity: 1;
+}
+

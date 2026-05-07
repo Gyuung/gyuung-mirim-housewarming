@@ -1,5 +1,6 @@
 import BottomActionBar from "@/components/BottomActionBar";
 import KakaoMap from "@/components/KakaoMap";
+import PhotoGallery from "@/components/PhotoGallery";
 import Image from "next/image";
 import {
   houseLocation,
@@ -60,30 +61,8 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
       <section className={styles.gallerySection} aria-label="우리 사진 갤러리">
         <p className={styles.smallTitle}>Gallery</p>
         <h2>우리의 순간들</h2>
-        <div className={styles.galleryGrid}>
-          <Image
-            className={styles.galleryMain}
-            src="/picture.png"
-            alt="집들이 초대 대표 사진"
-            width={1200}
-            height={1600}
-            sizes="(max-width: 460px) calc(100vw - 56px), 404px"
-          />
-          <Image
-            src="/dallongi.jpg"
-            alt="달롱이 사진"
-            width={1200}
-            height={1600}
-            sizes="(max-width: 460px) calc((100vw - 68px) / 2), 196px"
-          />
-          <Image
-            src="/dog.jpg"
-            alt="강아지 사진"
-            width={994}
-            height={1372}
-            sizes="(max-width: 460px) calc((100vw - 68px) / 2), 196px"
-          />
-        </div>
+        <p className={styles.gallerySubTitle}>우리집엔 액자가 없어서, 사진 먼저 살짝 공유드려요.</p>
+        <PhotoGallery />
       </section>
 
       <section className={styles.locationSection}>
