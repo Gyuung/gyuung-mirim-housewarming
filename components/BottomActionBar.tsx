@@ -109,8 +109,21 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
 
     try {
       if (isPublicWebUrl(shareUrl) && (await initializeKakao()) && window.Kakao?.Share) {
-        window.Kakao.Share.sendScrap({
-          requestUrl: shareUrl,
+        const imageUrl = new URL("/picture4.jpg", shareUrl).toString();
+
+        window.Kakao.Share.sendDefault({
+          objectType: "feed",
+          content: {
+            title: "미림 규웅 집들이",
+            description: "이름을 입력하면 초대장이 열려요.",
+            imageUrl,
+            imageWidth: 480,
+            imageHeight: 480,
+            link: {
+              mobileWebUrl: shareUrl,
+              webUrl: shareUrl,
+            },
+          },
         });
         return;
       }
