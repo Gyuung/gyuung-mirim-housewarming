@@ -1,0 +1,79 @@
+.shell {
+  width: min(100%, 460px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--card);
+  box-shadow: 0 0 48px rgba(48, 42, 37, 0.1);
+}
+
+.hero {
+  min-height: 42svh;
+  display: grid;
+  align-content: end;
+  padding: 56px 26px 42px;
+  background:
+    linear-gradient(180deg, rgba(31, 43, 34, 0.16), rgba(31, 43, 34, 0.78)),
+    url("/housewarming-hero.png");
+  background-position: center;
+  background-size: cover;
+  color: #fffaf4;
+  text-align: center;
+}
+
+.smallTitle {
+  color: var(--butter);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 18px 0 0;
+  font-size: clamp(2.6rem, 14vw, 4.2rem);
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.hero p:not(.smallTitle) {
+  margin-top: 18px;
+  color: rgba(255, 250, 244, 0.78);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.datePicker {
+  display: grid;
+  gap: 12px;
+  padding: 26px;
+}
+
+.dateLink {
+  display: grid;
+  gap: 6px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: #fff;
+}
+
+.dateLink span {
+  color: var(--rose);
+  font-size: 0.76rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.dateLink strong {
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
+.dateLink em {
+  color: var(--soft-ink);
+  font-size: 0.94rem;
+  font-style: normal;
+  font-weight: 700;
+}
+
