@@ -42,7 +42,7 @@ export default function DayCountdown({ invitation }: DayCountdownProps) {
   }, [targetDate]);
 
   const dayLabel =
-    remainingDays > 0 ? `D-${remainingDays}` : remainingDays === 0 ? "D-DAY" : `D+${Math.abs(remainingDays)}`;
+    remainingDays > 0 ? `D-${remainingDays}` : remainingDays === 0 ? "D-day" : `D+${Math.abs(remainingDays)}`;
   const message =
     remainingDays > 0
       ? "우리 집에서 만날 날까지"
