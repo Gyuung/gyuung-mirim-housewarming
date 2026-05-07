@@ -1,4 +1,5 @@
 import BottomActionBar from "@/components/BottomActionBar";
+import DayCountdown from "@/components/DayCountdown";
 import KakaoMap from "@/components/KakaoMap";
 import PhotoGallery from "@/components/PhotoGallery";
 import Image from "next/image";
@@ -24,6 +25,7 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
         </div>
         <div className={styles.coverPhoto} />
         <div className={styles.coverDateBlock}>
+          <DayCountdown invitation={invitation} />
           <strong>{invitation.coverDate}</strong>
         </div>
       </section>
