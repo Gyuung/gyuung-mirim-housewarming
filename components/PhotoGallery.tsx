@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import styles from "./PhotoGallery.module.css";
 
 const photos = [
-  { src: "/picture.png", alt: "집들이 사진 1", width: 1290, height: 2796 },
-  { src: "/picture2.jpg", alt: "집들이 사진 2", width: 3088, height: 2320 },
-  { src: "/picture3.jpg", alt: "집들이 사진 3", width: 1170, height: 2532 },
-  { src: "/picture4.jpg", alt: "집들이 사진 4", width: 480, height: 480 },
+  { src: "/gallery/1.png", alt: "집들이 사진 1", width: 1290, height: 2796 },
+  { src: "/gallery/2.jpg", alt: "집들이 사진 2", width: 4032, height: 3024 },
+  { src: "/gallery/3.jpg", alt: "집들이 사진 3", width: 4032, height: 3024 },
+  { src: "/gallery/4.jpg", alt: "집들이 사진 4", width: 3088, height: 2320 },
+  { src: "/gallery/5.jpg", alt: "집들이 사진 5", width: 1170, height: 2532 },
+  { src: "/gallery/6.jpg", alt: "집들이 사진 6", width: 480, height: 480 },
 ];
 
 export default function PhotoGallery() {
