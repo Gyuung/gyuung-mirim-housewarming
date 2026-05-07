@@ -1,3 +1,4 @@
+import BackgroundMusic from "@/components/BackgroundMusic";
 import BottomActionBar from "@/components/BottomActionBar";
 import DayCountdown from "@/components/DayCountdown";
 import KakaoMap from "@/components/KakaoMap";
@@ -17,6 +18,7 @@ type InvitationViewProps = {
 export default function InvitationView({ invitation }: InvitationViewProps) {
   return (
     <main className={styles.shell}>
+      <BackgroundMusic />
       <section className={styles.cover} aria-label="집들이 초대장 표지">
         <div className={styles.coverText}>
           <p className={styles.smallTitle}>Housewarming Invitation</p>
