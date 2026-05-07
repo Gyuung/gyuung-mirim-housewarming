@@ -25,6 +25,10 @@ function formatDate(value: string) {
   return new Intl.DateTimeFormat("ko-KR", {
     month: "2-digit",
     day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
   }).format(new Date(value));
 }
 
@@ -32,9 +36,13 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
   const [entries, setEntries] = useState<GuestbookEntry[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [password, setPassword] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [deleteTargetId, setDeleteTargetId] = useState<string | null>(null);
+  const [deletePassword, setDeletePassword] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const loadEntries = async () => {
@@ -63,9 +71,10 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
 
     const trimmedName = name.trim();
     const trimmedMessage = message.trim();
+    const trimmedPassword = password.trim();
 
-    if (!trimmedName || !trimmedMessage) {
-      setStatusMessage("이름과 메시지를 입력해주세요.");
+    if (!trimmedName || !trimmedMessage || trimmedPassword.length < 4) {
+      setStatusMessage("이름, 메시지, 비밀번호 4자 이상을 입력해주세요.");
       return;
     }
 
@@ -83,6 +92,7 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
         body: JSON.stringify({
           name: trimmedName,
           message: trimmedMessage,
+          password: trimmedPassword,
           invitation: invitationSlug,
           website: formData.get("website"),
         }),
@@ -98,11 +108,52 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
       }
 
       setMessage("");
+      setPassword("");
       setStatusMessage(data.message ?? "방명록을 남겼습니다.");
     } catch {
       setStatusMessage("잠시 후 다시 남겨주세요.");
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const deleteEntry = async (entryId: string) => {
+    const trimmedPassword = deletePassword.trim();
+
+    if (trimmedPassword.length < 4) {
+      setStatusMessage("삭제 비밀번호를 입력해주세요.");
+      return;
+    }
+
+    setIsDeleting(true);
+    setStatusMessage("");
+
+    try {
+      const response = await fetch("/api/guestbook", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: entryId,
+          invitation: invitationSlug,
+          password: trimmedPassword,
+        }),
+      });
+      const data = (await response.json()) as GuestbookResponse;
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      setEntries((currentEntries) => currentEntries.filter((entry) => entry.id !== entryId));
+      setDeleteTargetId(null);
+      setDeletePassword("");
+      setStatusMessage(data.message ?? "방명록을 삭제했습니다.");
+    } catch {
+      setStatusMessage("비밀번호를 확인해주세요.");
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -131,6 +182,15 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
           aria-label="방명록 메시지"
         />
         <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          maxLength={24}
+          placeholder="삭제용 비밀번호 4자 이상"
+          aria-label="삭제용 비밀번호"
+        />
+        <input
           className={styles.honeypot}
           type="text"
           name="website"
@@ -146,14 +206,55 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
       {statusMessage ? <p className={styles.status}>{statusMessage}</p> : null}
 
       <div className={styles.entries} aria-live="polite">
-        {isLoading ? <p className={styles.empty}>방명록을 불러오는 중입니다.</p> : null}
-        {entries.map((entry) => (
+        {!isLoading && entries.map((entry) => (
           <article className={styles.entry} key={entry.id}>
             <div>
               <strong>{entry.name}</strong>
               <time dateTime={entry.created_at}>{formatDate(entry.created_at)}</time>
             </div>
             <p>{entry.message}</p>
+            {deleteTargetId === entry.id ? (
+              <div className={styles.deleteForm}>
+                <input
+                  type="password"
+                  value={deletePassword}
+                  onChange={(event) => setDeletePassword(event.target.value)}
+                  maxLength={24}
+                  placeholder="비밀번호"
+                  aria-label="방명록 삭제 비밀번호"
+                />
+                <div>
+                  <button
+                    type="button"
+                    onClick={() => void deleteEntry(entry.id)}
+                    disabled={isDeleting}
+                  >
+                    삭제
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDeleteTargetId(null);
+                      setDeletePassword("");
+                    }}
+                    disabled={isDeleting}
+                  >
+                    취소
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                type="button"
+                className={styles.deleteToggle}
+                onClick={() => {
+                  setDeleteTargetId(entry.id);
+                  setDeletePassword("");
+                }}
+              >
+                삭제
+              </button>
+            )}
           </article>
         ))}
       </div>
