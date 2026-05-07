@@ -1,27 +1,19 @@
 import BottomActionBar from "@/components/BottomActionBar";
 import KakaoMap from "@/components/KakaoMap";
+import Image from "next/image";
+import {
+  houseLocation,
+  kakaoRouteMobileWebUrl,
+  tmapRouteUrl,
+} from "@/lib/location";
 import type { Invitation } from "@/lib/invitations";
-import { houseLocation, kakaoMapUrl, kakaoRouteUrl, tmapRouteUrl } from "@/lib/location";
 import styles from "./InvitationView.module.css";
-
-type Detail = {
-  label: string;
-  value: string;
-};
 
 type InvitationViewProps = {
   invitation: Invitation;
 };
 
 export default function InvitationView({ invitation }: InvitationViewProps) {
-  const details: Detail[] = [
-    { label: "날짜", value: invitation.dateLabel },
-    { label: "시간", value: invitation.timeLabel },
-    { label: "장소", value: houseLocation.address },
-  ];
-
-  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=%EC%A7%91%EB%93%A4%EC%9D%B4%20%EC%B4%88%EB%8C%80&dates=${invitation.calendarStart}/${invitation.calendarEnd}&location=${encodeURIComponent(houseLocation.address)}&details=%EC%83%88%EC%A7%91%EC%97%90%EC%84%9C%20%ED%95%A8%EA%BB%98%ED%95%B4%EC%9A%94.`;
-
   return (
     <main className={styles.shell}>
       <section className={styles.cover} aria-label="집들이 초대장 표지">
@@ -53,31 +45,49 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
 
       <section className={styles.photoSection} aria-label="초대 사진">
         <figure>
-          <div className={styles.galleryPhoto} />
+          <Image
+            className={styles.galleryPhoto}
+            src="/dog.jpg"
+            alt="달롱이를 보러 오는 초대 사진"
+            width={994}
+            height={1372}
+            sizes="(max-width: 460px) calc(100vw - 56px), 404px"
+          />
           <figcaption>Our warm housewarming day</figcaption>
         </figure>
       </section>
 
-      <section className={styles.dateSection} id="details" aria-label="초대 일시">
-        <p className={styles.smallTitle}>Date & Place</p>
-        <div className={styles.calendarCard}>
-          <span>{invitation.monthName}</span>
-          <strong>{invitation.day}</strong>
-          <span>{invitation.weekdayEn}</span>
-        </div>
-        <div className={styles.detailList}>
-          {details.map((detail) => (
-            <div className={styles.detailRow} key={detail.label}>
-              <span>{detail.label}</span>
-              <strong>{detail.value}</strong>
-            </div>
-          ))}
+      <section className={styles.gallerySection} aria-label="우리 사진 갤러리">
+        <p className={styles.smallTitle}>Gallery</p>
+        <h2>우리의 순간들</h2>
+        <div className={styles.galleryGrid}>
+          <Image
+            className={styles.galleryMain}
+            src="/picture.png"
+            alt="집들이 초대 대표 사진"
+            width={1200}
+            height={1600}
+            sizes="(max-width: 460px) calc(100vw - 56px), 404px"
+          />
+          <Image
+            src="/dallongi.jpg"
+            alt="달롱이 사진"
+            width={1200}
+            height={1600}
+            sizes="(max-width: 460px) calc((100vw - 68px) / 2), 196px"
+          />
+          <Image
+            src="/dog.jpg"
+            alt="강아지 사진"
+            width={994}
+            height={1372}
+            sizes="(max-width: 460px) calc((100vw - 68px) / 2), 196px"
+          />
         </div>
       </section>
 
       <section className={styles.locationSection}>
         <p className={styles.smallTitle}>Location</p>
-        <h2>{houseLocation.name}</h2>
         <p className={styles.locationSubTitle}>{houseLocation.placeName}</p>
         <address>{houseLocation.address}</address>
         <div className={styles.mapBox}>
@@ -88,41 +98,27 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
             <span>주소</span>
             <strong>{houseLocation.address}</strong>
           </div>
-          <div>
-            <span>도착</span>
-            <strong>405동 1604호</strong>
-          </div>
         </div>
         <div className={styles.mapActionGrid} aria-label="지도와 내비게이션 링크">
-          <a href={kakaoMapUrl} target="_blank">
-            <span>지도보기</span>
-            <em>위치 확인</em>
-          </a>
-          <a href={kakaoRouteUrl} target="_blank">
-            <span>카카오맵</span>
-            <em>길찾기</em>
+          <a href={kakaoRouteMobileWebUrl} target="_blank">
+            <i className={styles.actionIcon} aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 19 12 4l7 15-7-3-7 3Z" />
+              </svg>
+            </i>
+            <span>카카오내비</span>
+            <em>자동차 안내</em>
           </a>
           <a href={tmapRouteUrl}>
+            <i className={styles.actionIcon} aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 5h14v4h-5v10h-4V9H5V5Z" />
+              </svg>
+            </i>
             <span>티맵</span>
             <em>내비 연결</em>
           </a>
-          <a href={calendarUrl} target="_blank">
-            <span>일정저장</span>
-            <em>캘린더</em>
-          </a>
         </div>
-      </section>
-
-      <section className={styles.rsvpSection}>
-        <p className={styles.smallTitle}>RSVP</p>
-        <h2>참석 여부를 알려주세요.</h2>
-        <p>인원에 맞춰 음식과 음료를 준비하려고 해요.</p>
-        <a
-          href="sms:+821012345678?body=%EC%A7%91%EB%93%A4%EC%9D%B4%20%EC%B0%B8%EC%84%9D%ED%95%A0%EA%B2%8C%EC%9A%94!"
-          className={`${styles.primaryButton} ${styles.wideButton}`}
-        >
-          문자로 답장하기
-        </a>
       </section>
 
       <BottomActionBar invitation={invitation} />

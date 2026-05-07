@@ -6,14 +6,16 @@ export default function Home() {
   return (
     <main className={styles.shell}>
       <section className={styles.hero}>
-        <p className={styles.smallTitle}>Housewarming Invitation</p>
-        <h1>
-          집들이 날짜를
-          <br />
-          골라주세요
-        </h1>
-        <p className={styles.dallongiBadge}>달롱이 (우파루파) 보러 오세요</p>
-        <p>초대받은 날짜를 선택하면 모바일 초대장이 열려요.</p>
+        <div className={styles.heroContent}>
+          <p className={styles.smallTitle}>Housewarming Invitation</p>
+          <h1>
+            집들이 날짜를
+            <br />
+            골라주세요
+          </h1>
+          <p className={styles.dallongiBadge}>달롱이 (우파루파) 보러 오세요</p>
+          <p>초대받은 날짜를 선택하면 모바일 초대장이 열려요.</p>
+        </div>
       </section>
 
       <section className={styles.datePicker} aria-label="예정된 집들이 날짜">
