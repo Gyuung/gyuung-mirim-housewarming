@@ -76,12 +76,12 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
     return true;
   };
 
-  const getShareUrl = () => {
-    if (!siteUrl) {
-      return window.location.href;
+  const getEntryUrl = () => {
+    if (siteUrl) {
+      return new URL("/", siteUrl).toString();
     }
 
-    return new URL(window.location.pathname, siteUrl).toString();
+    return new URL("/", window.location.origin).toString();
   };
 
   const isPublicWebUrl = (url: string) => {
@@ -98,28 +98,19 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
     }
   };
 
-  const copyLink = async (url = getShareUrl()) => {
+  const copyLink = async (url = getEntryUrl()) => {
     await navigator.clipboard.writeText(url);
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1800);
   };
 
   const shareKakao = async () => {
-    const shareUrl = getShareUrl();
+    const shareUrl = getEntryUrl();
 
     try {
       if (isPublicWebUrl(shareUrl) && (await initializeKakao()) && window.Kakao?.Share) {
         window.Kakao.Share.sendScrap({
           requestUrl: shareUrl,
-          buttons: [
-            {
-              title: "초대장 보기",
-              link: {
-                mobileWebUrl: shareUrl,
-                webUrl: shareUrl,
-              },
-            },
-          ],
         });
         return;
       }
@@ -131,7 +122,6 @@ export default function BottomActionBar({ invitation }: BottomActionBarProps) {
       try {
         await navigator.share({
           title: "집들이 초대장",
-          text: `${invitation.dateLabel} ${invitation.timeLabel}`,
           url: shareUrl,
         });
         return;
