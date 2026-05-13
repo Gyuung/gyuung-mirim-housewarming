@@ -4,6 +4,7 @@ out/
 
 *.log
 .env*
+*.tsbuildinfo
 
 # Local notes and generated docs
 *.md
