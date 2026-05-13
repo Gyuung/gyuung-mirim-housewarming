@@ -15,6 +15,8 @@ export type Invitation = {
   messageTitle: string;
   messageBody: string[];
   countdownPastMessage?: string;
+  guestbookTitle?: string;
+  guestbookDescription?: string;
 };
 
 export const invitations: Invitation[] = [
@@ -38,6 +40,8 @@ export const invitations: Invitation[] = [
       "초대받은 손님은 아니지만, 이 공간의 주인공으로 우리의 시작을 오래 기억하고 싶어요.",
     ],
     countdownPastMessage: "우리 둘이 같이 산 지",
+    guestbookTitle: "House Diary",
+    guestbookDescription: "우리 집에서 쌓아가는 순간들을 남겨요.",
   },
   {
     slug: "2026-06-12",

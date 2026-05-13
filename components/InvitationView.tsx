@@ -120,7 +120,11 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
         </div>
       </section>
 
-      <Guestbook invitationSlug={invitation.slug} />
+      <Guestbook
+        invitationSlug={invitation.slug}
+        title={invitation.guestbookTitle}
+        description={invitation.guestbookDescription}
+      />
 
       <BottomActionBar invitation={invitation} />
     </main>

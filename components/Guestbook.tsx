@@ -19,6 +19,8 @@ type GuestbookResponse = {
 
 type GuestbookProps = {
   invitationSlug: string;
+  title?: string;
+  description?: string;
 };
 
 function formatDate(value: string) {
@@ -32,7 +34,11 @@ function formatDate(value: string) {
   }).format(new Date(value));
 }
 
-export default function Guestbook({ invitationSlug }: GuestbookProps) {
+export default function Guestbook({
+  invitationSlug,
+  title = "Guestbook",
+  description = "오신다는 마음, 짧게 남겨주세요.",
+}: GuestbookProps) {
   const [entries, setEntries] = useState<GuestbookEntry[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
@@ -160,9 +166,9 @@ export default function Guestbook({ invitationSlug }: GuestbookProps) {
   return (
     <section className={styles.guestbook} aria-labelledby="guestbook-title">
       <p id="guestbook-title" className={styles.smallTitle}>
-        Guestbook
+        {title}
       </p>
-      <p className={styles.description}>오신다는 마음, 짧게 남겨주세요.</p>
+      <p className={styles.description}>{description}</p>
 
       <form className={styles.form} onSubmit={submitEntry}>
         <input
