@@ -14,17 +14,17 @@ export type Invitation = {
 
 export const invitations: Invitation[] = [
   {
-    slug: "2026-05-09",
+    slug: "2026-06-12",
     year: "2026",
-    monthName: "May",
-    day: "09",
-    weekdayKo: "토요일",
-    weekdayEn: "Saturday",
-    dateLabel: "2026년 5월 9일 토요일",
-    timeLabel: "오후 4시",
-    coverDate: "2026. 05. 09. Sat. 4:00 PM",
-    calendarStart: "20260509T070000Z",
-    calendarEnd: "20260509T110000Z",
+    monthName: "June",
+    day: "12",
+    weekdayKo: "금요일",
+    weekdayEn: "Friday",
+    dateLabel: "2026년 6월 12일 금요일",
+    timeLabel: "오후 8시",
+    coverDate: "2026. 06. 12. Fri. 8:00 PM",
+    calendarStart: "20260612T110000Z",
+    calendarEnd: "20260612T150000Z",
   },
   {
     slug: "2026-05-29",
@@ -56,9 +56,9 @@ export const invitations: Invitation[] = [
 
 const guestInvitationSlugs = new Map<string, string>(
   [
-    ["최성환", "2026-05-09"],
-    ["이동혁", "2026-05-09"],
-    ["고동혁", "2026-05-09"],
+    ["최성환", "2026-06-12"],
+    ["이동혁", "2026-06-12"],
+    ["고동혁", "2026-06-12"],
     ["배유정", "2026-05-29"],
     ["강다은", "2026-05-29"],
     ["양정석", "2026-05-30"],
