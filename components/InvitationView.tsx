@@ -17,6 +17,8 @@ type InvitationViewProps = {
 };
 
 export default function InvitationView({ invitation }: InvitationViewProps) {
+  const messageTitleLines = invitation.messageTitle.split("\n");
+
   return (
     <main className={styles.shell}>
       <BackgroundMusic />
@@ -24,7 +26,9 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
         <div className={styles.coverText}>
           <p className={styles.smallTitle}>Housewarming Invitation</p>
           <h1>미림 그리고 규웅</h1>
-          <p className={styles.coverLine}>새로운 집에서 처음 나누는 초대</p>
+          <p className={styles.coverLine}>
+            {invitation.coverLine ?? "새로운 집에서 처음 나누는 초대"}
+          </p>
         </div>
         <div className={styles.coverPhoto} />
         <div className={styles.coverDateBlock}>
@@ -34,17 +38,18 @@ export default function InvitationView({ invitation }: InvitationViewProps) {
       </section>
 
       <section className={styles.messageSection}>
-        <p className={styles.smallTitle}>Invite You</p>
+        <p className={styles.smallTitle}>{invitation.messageLabel ?? "Invite You"}</p>
         <h2>
-          소중한 분들을
-          <br />
-          우리의 집으로 초대합니다
+          {messageTitleLines.map((line, index) => (
+            <span key={line}>
+              {index > 0 ? <br /> : null}
+              {line}
+            </span>
+          ))}
         </h2>
-        <p>
-          이사 후 정리도 끝나고, 이제 좋아하는 사람들을 초대할 차례가 되었어요.
-          거창한 자리는 아니지만 따뜻한 음식과 편한 시간을 준비해둘게요.
-        </p>
-        <p>부담 없이 들러서 함께 웃고 이야기 나눠요.</p>
+        {invitation.messageBody.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
       </section>
 
       <section className={styles.photoSection} aria-label="초대 사진">

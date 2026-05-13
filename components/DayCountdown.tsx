@@ -48,7 +48,7 @@ export default function DayCountdown({ invitation }: DayCountdownProps) {
       ? "우리 집에서 만날 날까지"
       : remainingDays === 0
         ? "오늘, 우리 집에서 만나요"
-        : "함께한 따뜻한 시간을 기억할게요";
+        : invitation.countdownPastMessage ?? "함께한 따뜻한 시간을 기억할게요";
 
   return (
     <section className={styles.countdown} aria-label="집들이 디데이">
@@ -57,7 +57,7 @@ export default function DayCountdown({ invitation }: DayCountdownProps) {
       <strong key={dayLabel}>{dayLabel}</strong>
       <span>
         {invitation.dateLabel}
-        {invitation.timeLabel !== "시간 미정" ? ` · ${invitation.timeLabel}` : ""}
+        {!["시간 미정", "입주일"].includes(invitation.timeLabel) ? ` · ${invitation.timeLabel}` : ""}
       </span>
     </section>
   );

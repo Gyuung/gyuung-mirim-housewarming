@@ -10,9 +10,35 @@ export type Invitation = {
   coverDate: string;
   calendarStart: string;
   calendarEnd: string;
+  coverLine?: string;
+  messageLabel?: string;
+  messageTitle: string;
+  messageBody: string[];
+  countdownPastMessage?: string;
 };
 
 export const invitations: Invitation[] = [
+  {
+    slug: "2026-02-22",
+    year: "2026",
+    monthName: "February",
+    day: "22",
+    weekdayKo: "일요일",
+    weekdayEn: "Sunday",
+    dateLabel: "2026년 2월 22일 일요일",
+    timeLabel: "입주일",
+    coverDate: "2026. 02. 22. Sun. Move-in Day",
+    calendarStart: "20260222",
+    calendarEnd: "20260223",
+    coverLine: "우리가 함께 살기 시작한 날",
+    messageLabel: "Our Home",
+    messageTitle: "우리 둘이\n같이 산 지",
+    messageBody: [
+      "2026년 2월 22일, 왕규웅과 박미림은 이 집에서 함께 살기 시작했어요.",
+      "초대받은 손님은 아니지만, 이 공간의 주인공으로 우리의 시작을 오래 기억하고 싶어요.",
+    ],
+    countdownPastMessage: "우리 둘이 같이 산 지",
+  },
   {
     slug: "2026-06-12",
     year: "2026",
@@ -25,6 +51,11 @@ export const invitations: Invitation[] = [
     coverDate: "2026. 06. 12. Fri. 8:00 PM",
     calendarStart: "20260612T110000Z",
     calendarEnd: "20260612T150000Z",
+    messageTitle: "소중한 분들을\n우리의 집으로 초대합니다",
+    messageBody: [
+      "이사 후 정리도 끝나고, 이제 좋아하는 사람들을 초대할 차례가 되었어요. 거창한 자리는 아니지만 따뜻한 음식과 편한 시간을 준비해둘게요.",
+      "부담 없이 들러서 함께 웃고 이야기 나눠요.",
+    ],
   },
   {
     slug: "2026-05-29",
@@ -38,6 +69,11 @@ export const invitations: Invitation[] = [
     coverDate: "2026. 05. 29. Fri. Time TBD",
     calendarStart: "20260529",
     calendarEnd: "20260530",
+    messageTitle: "소중한 분들을\n우리의 집으로 초대합니다",
+    messageBody: [
+      "이사 후 정리도 끝나고, 이제 좋아하는 사람들을 초대할 차례가 되었어요. 거창한 자리는 아니지만 따뜻한 음식과 편한 시간을 준비해둘게요.",
+      "부담 없이 들러서 함께 웃고 이야기 나눠요.",
+    ],
   },
   {
     slug: "2026-05-30",
@@ -51,11 +87,18 @@ export const invitations: Invitation[] = [
     coverDate: "2026. 05. 30. Sat. Time TBD",
     calendarStart: "20260530",
     calendarEnd: "20260531",
+    messageTitle: "소중한 분들을\n우리의 집으로 초대합니다",
+    messageBody: [
+      "이사 후 정리도 끝나고, 이제 좋아하는 사람들을 초대할 차례가 되었어요. 거창한 자리는 아니지만 따뜻한 음식과 편한 시간을 준비해둘게요.",
+      "부담 없이 들러서 함께 웃고 이야기 나눠요.",
+    ],
   },
 ];
 
 const guestInvitationSlugs = new Map<string, string>(
   [
+    ["왕규웅", "2026-02-22"],
+    ["박미림", "2026-02-22"],
     ["최성환", "2026-06-12"],
     ["이동혁", "2026-06-12"],
     ["고동혁", "2026-06-12"],
