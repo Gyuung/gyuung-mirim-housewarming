@@ -8,4 +8,5 @@ out/
 
 # Local notes and generated docs
 *.md
+!AGENTS.md
 docs/
