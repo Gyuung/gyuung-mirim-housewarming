@@ -41,6 +41,12 @@
 - If the change is documentation-only, no build is required.
 - Report any check that could not be run and why.
 
+## Git Workflow
+
+- When the user asks to commit changes in this repository, use `npm run commit`.
+- Do not create commits with raw `git commit -m` unless the user explicitly asks to bypass `shared/commit-script.ts`.
+- After `npm run commit`, inspect the resulting commits with `git log -1 --oneline` or `git status --short` before pushing.
+
 ## Editing Rules
 
 - Keep changes scoped to the requested feature or fix.
