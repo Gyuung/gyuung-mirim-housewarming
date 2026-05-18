@@ -46,6 +46,7 @@
 - When the user asks to commit changes in this repository, use `npm run commit`.
 - Do not create commits with raw `git commit -m` unless the user explicitly asks to bypass `shared/commit-script.ts`.
 - After `npm run commit`, inspect the resulting commits with `git log -1 --oneline` or `git status --short` before pushing.
+- When the user asks to commit changes, push the new commits to `origin/main` after the commit succeeds unless the user explicitly says not to push.
 
 ## Editing Rules
 
