@@ -235,7 +235,7 @@ async function createAiCommitPlan(files: string[], diff: string): Promise<Commit
 async function commitPlannedChange(message: string, files: string[]) {
   await git(['add', '-u', '--', ...files]);
 
-  const addableFiles = [];
+  const addableFiles: string[] = [];
   for (const file of files) {
     if (!(await isIgnored(file))) {
       addableFiles.push(file);
@@ -260,6 +260,12 @@ async function runCommitScript() {
 
   const diff = await getDiffForAi(files);
   const plan = await createAiCommitPlan(files, diff);
+
+  const {stdout: stagedFilesOutput} = await git(['diff', '--cached', '--name-only', '-z', '--', ...files]);
+  const stagedFiles = splitNullSeparated(stagedFilesOutput);
+  if (stagedFiles.length > 0) {
+    await git(['restore', '--staged', '--', ...stagedFiles]);
+  }
 
   console.log(`AI planned ${plan.commits.length} commit(s).`);
   for (const commit of plan.commits) {
