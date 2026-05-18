@@ -32,6 +32,20 @@ async function git(args: string[]) {
   });
 }
 
+async function isIgnored(file: string) {
+  try {
+    await git(['check-ignore', '-q', '--', file]);
+    return true;
+  } catch (error) {
+    const exitCode = (error as {code?: number}).code;
+    if (exitCode === 1) {
+      return false;
+    }
+
+    throw error;
+  }
+}
+
 function splitNullSeparated(stdout: string) {
   return stdout.split('\0').map((file) => file.trim()).filter(Boolean);
 }
@@ -219,7 +233,19 @@ async function createAiCommitPlan(files: string[], diff: string): Promise<Commit
 }
 
 async function commitPlannedChange(message: string, files: string[]) {
-  await git(['add', '--', ...files]);
+  await git(['add', '-u', '--', ...files]);
+
+  const addableFiles = [];
+  for (const file of files) {
+    if (!(await isIgnored(file))) {
+      addableFiles.push(file);
+    }
+  }
+
+  if (addableFiles.length > 0) {
+    await git(['add', '--', ...addableFiles]);
+  }
+
   await git(['commit', '-m', message]);
   console.log(`Committed ${files.length} file(s): ${message}`);
 }

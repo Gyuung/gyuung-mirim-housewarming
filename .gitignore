@@ -5,6 +5,7 @@ out/
 *.log
 .env*
 *.tsbuildinfo
+next-env.d.ts
 
 # Local notes and generated docs
 *.md
