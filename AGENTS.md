@@ -47,6 +47,7 @@
 - Do not create commits with raw `git commit -m` unless the user explicitly asks to bypass `shared/commit-script.ts`.
 - After `npm run commit`, inspect the resulting commits with `git log -1 --oneline` or `git status --short` before pushing.
 - When the user asks to commit changes, push the new commits to `origin/main` after the commit succeeds unless the user explicitly says not to push.
+- Treat `next-env.d.ts` as a Next.js generated file. Do not include it in commits unless the user explicitly asks to commit that file.
 
 ## Editing Rules
 
